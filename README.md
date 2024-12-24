@@ -8,7 +8,7 @@ of Oulu, Oulu, FI-90014, Finland
 USA
 3. Infotech Institute, University of Oulu, Oulu, FI-90014, Finland
 4. University of Illinois Cancer Center, Chicago, IL 60612, USA
-
+---
 * MatriCom features an intuitive graphical user interface implemented in R Shiny.
 * MatriCom is available and **ready-to-use** online at https://matrinet.shinyapps.io/matricom/
 * To locally install MatriCom on your own computer, see [INSTALL](INSTALL.md) instructions.
