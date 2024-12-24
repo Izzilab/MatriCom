@@ -1,17 +1,26 @@
-# MatriCom: a tool to infer matrisome communication systems in single-cell RNA-seq datasets
+# MatriCom: a scRNA-Seq data mining tool to infer ECM-ECM and cell-ECM communication systems
+
+[Rijuta Lamba](https://orcid.org/0000-0001-8323-4694) 1, Asia M. Paguntalan 2, [Petar B. Petrov](https://orcid.org/0000-0001-5551-8032) 3, [Alexandra Naba](https://orcid.org/0000-0002-4796-5614) 2,4, [Valerio Izzi](https://orcid.org/0000-0002-9960-4917) 1,3
+
+1. Faculty of Biochemistry and Molecular Medicine & Faculty of Medicine, BioIM Unit, University
+of Oulu, Oulu, FI-90014, Finland
+2. Department of Physiology and Biophysics, University of Illinois Chicago, Chicago, IL 60612,
+USA
+3. Infotech Institute, University of Oulu, Oulu, FI-90014, Finland
+4. University of Illinois Cancer Center, Chicago, IL 60612, USA
 
 * MatriCom features an intuitive graphical user interface implemented in R Shiny.
 * MatriCom is available and **ready-to-use** online at https://matrinet.shinyapps.io/matricom/
 * To locally install MatriCom on your own computer, see [INSTALL](INSTALL.md) instructions.
 * Our curated interaction database, **MatriComDB**, is an integral part of the MatriCom package and can be downloaded separately [here](inst/webApp/www/MatricomDB/).
 * The [MatriCom-analyses](https://github.com/Izzilab/MatriCom-analyses) repository includes examples of analyses performed using MatriCom.
-* If you use MatriCom in your publications, please cite our upcoming manuscript: [doi XXXX](https://doi.org/) (*preprint at bioRxiv*)
+* If you use MatriCom in your publications, please cite our upcoming manuscript: **doi** [10.1101/2024.12.10.627834](https://doi.org/10.1101/2024.12.10.627834) (*preprint at bioRxiv*)
 
 [![Badge](https://img.shields.io/badge/MatriCom-@Shinyapps-blue)](https://matrinet.shinyapps.io/matricom/)
 [![Badge](https://img.shields.io/badge/Installation-info-green)](INSTALL.md)
 [![Badge](https://img.shields.io/badge/MatriComDB-database-orange)](inst/webApp/www/MatricomDB/)
 [![Badge](https://img.shields.io/badge/Analysis-examples-orange)](https://github.com/Izzilab/MatriCom-analyses)
-[![Badge](https://img.shields.io/badge/Manuscript-bioRxiv-red)](https://doi.org/XXX)
+[![Badge](https://img.shields.io/badge/Manuscript-bioRxiv-red)](https://www.biorxiv.org/content/10.1101/2024.12.10.627834)
 [![Badge](https://img.shields.io/badge/Release-v1.0-green)](https://github.com/Izzilab/matRicom/releases/tag/1.0)
 
 * Authors and maintainers: Izzi Lab (✉️ <valerio.izzi@oulu.fi>) and Naba Lab (✉️ <anaba@uic.edu>)
