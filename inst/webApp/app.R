@@ -1542,22 +1542,28 @@ server <- function(input,output,session) {
       df <- readRDS(input$file1$datapath)
 
       if(strsplit(as.character(df@version),split="\\.")[[1]][1] == 5){
-        df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
+        mat <- CreateAssayObject(counts=df@assays$RNA$counts)
+        mat2 <- CreateSeuratObject(counts=mat,meta.data = df@meta.data)
+        mat2 <- NormalizeData(mat2)
+        #df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
       }
 
       value(1)
-      return(df)
+      return(mat2)
     }
 
     if(isTruthy(length(dp[grepl(".qs",dp,ignore.case = T)])>0)){
       df <- qread(input$file1$datapath)
 
       if(strsplit(as.character(df@version),split="\\.")[[1]][1] == 5){
-        df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
+        mat <- CreateAssayObject(counts=df@assays$RNA$counts)
+        mat2 <- CreateSeuratObject(counts=mat,meta.data = df@meta.data)
+        mat2 <- NormalizeData(mat2)
+        #df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
       }
 
       value(1)
-      return(df)
+      return(mat2)
     }
 
     if(isTruthy(length(dp[grepl(".H5AD",dp,ignore.case = T)])>0)){
@@ -1569,11 +1575,14 @@ server <- function(input,output,session) {
       df <- LoadH5Seurat(paste0(g,".h5seurat"),verbose = F)
 
       if(strsplit(as.character(df@version),split="\\.")[[1]][1] == 5){
-        df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
+        mat <- CreateAssayObject(counts=df@assays$RNA$counts)
+        mat2 <- CreateSeuratObject(counts=mat,meta.data = df@meta.data)
+        mat2 <- NormalizeData(mat2)
+        #df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
       }
 
       value(1)
-      return(df)
+      return(mat2)
     }
 
 
