@@ -28,8 +28,11 @@ USA
 
 [![Badge](https://img.shields.io/badge/HuBMAP-U01HG012680-lightgreen)](https://commonfund.nih.gov/HuBMAP)
 [![Badge](https://img.shields.io/badge/IMAT-R21CA261642-lightgreen)](https://www.cancer.gov/about-nci/organization/cssi/research/imat)
+[![Badge](https://img.shields.io/badge/AKA-326291-lightblue)](https://www.aka.fi/en/)
+[![Badge](https://img.shields.io/badge/EU-CARES-lightblue)](https://www.cares-eu.org/)
 [![Badge](https://img.shields.io/badge/CFF-2023--2024-lightblue)](https://syopasaatio.fi/)
-[![Badge](https://img.shields.io/badge/DigiHealth-Infotech-lightblue)](https://www.oulu.fi/en/research/creating-better-health-our-digital-health-knowhow)
+[![Badge](https://img.shields.io/badge/FCI-K.AJ_F-lightblue)](https://www.syopainstituutti.com/front-page)
+[![Badge](https://img.shields.io/badge/DigiHealth-Oulu_University/Infotech-lightblue)](https://www.oulu.fi/en/research/creating-better-health-our-digital-health-knowhow)
 
 ## Motivation
 Single-cell RNA sequencing (scRNA-seq) enables the study of cell-cell communications within and across entire tissues, organs, and systems. The composition of the matrisome, a complex meshwork of extracellular matrix (ECM) and ECM-associated proteins, endowed with scaffolding, enzymatic, and signaling activities necessary for multicellular life, can be studied in detail with scRNA-seq. Its role in forming communication networks within tissues and organs, however, cannot be studied equally in depth using existing computational tools. Because the biological properties of the matrisome differ in many ways from that of the intracellular proteome, matrisome interactions are largely under-represented by other tools whose algorithms are tailored towards the intracellular proteome and the signalosome.
