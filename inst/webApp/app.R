@@ -1543,7 +1543,11 @@ server <- function(input,output,session) {
       df <- readRDS(input$file1$datapath)
 
       if(strsplit(as.character(df@version),split="\\.")[[1]][1] != 3){
-        mat <- CreateAssayObject(counts=df@assays$RNA$counts)
+        def <- DefaultAssay(df)
+        mat <- df@assays[[def]]$counts
+        rownames(mat) <- rownames(df@assays[[def]]$counts)
+        colnames(mat) <- colnames(df@assays[[def]]$counts)
+        mat <- CreateAssayObject(counts=mat)
         mat2 <- CreateSeuratObject(counts=mat,meta.data = df@meta.data)
         mat2 <- NormalizeData(mat2)
         #df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
@@ -1557,7 +1561,11 @@ server <- function(input,output,session) {
       df <- qread(input$file1$datapath)
 
       if(strsplit(as.character(df@version),split="\\.")[[1]][1] != 3){
-        mat <- CreateAssayObject(counts=df@assays$RNA$counts)
+        def <- DefaultAssay(df)
+        mat <- df@assays[[def]]$counts
+        rownames(mat) <- rownames(df@assays[[def]]$counts)
+        colnames(mat) <- colnames(df@assays[[def]]$counts)
+        mat <- CreateAssayObject(counts=mat)
         mat2 <- CreateSeuratObject(counts=mat,meta.data = df@meta.data)
         mat2 <- NormalizeData(mat2)
         #df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
@@ -1576,7 +1584,11 @@ server <- function(input,output,session) {
       df <- LoadH5Seurat(paste0(g,".h5seurat"),verbose = F)
 
       if(strsplit(as.character(df@version),split="\\.")[[1]][1] != 3){
-        mat <- CreateAssayObject(counts=df@assays$RNA$counts)
+        def <- DefaultAssay(df)
+        mat <- df@assays[[def]]$counts
+        rownames(mat) <- rownames(df@assays[[def]]$counts)
+        colnames(mat) <- colnames(df@assays[[def]]$counts)
+        mat <- CreateAssayObject(counts=mat)
         mat2 <- CreateSeuratObject(counts=mat,meta.data = df@meta.data)
         mat2 <- NormalizeData(mat2)
         #df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
