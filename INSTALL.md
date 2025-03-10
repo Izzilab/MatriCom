@@ -45,4 +45,7 @@ BiocManager::install("EnsDb.Hsapiens.v86")
 # from GitHub:
 devtools::install_github("mojaveazure/seurat-disk")
 devtools::install_github("izzilab/MatriCom")
+
+# when ready, run:
+matricom.app()
 ```
