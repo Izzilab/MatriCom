@@ -36,6 +36,7 @@ library(igraph)
 library(stringr)
 library(reshape2)
 library(htmltools)
+library(cicerone)
 
 # Moved to R/, because stuff in `R` gets sourced automatically when in package/project
 #source("./Data/get_expressed_genes_mod.R")
