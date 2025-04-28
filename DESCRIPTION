@@ -16,7 +16,8 @@ Imports: shiny, cicerone, Matrix, DT, dplyr, data.table, ggplot2,
         shinyBS, Seurat, SeuratDisk, SeuratObject, scCustomize, sp,
         uwot, shinydashboard, ensembldb, EnsDb.Hsapiens.v86, gridExtra,
         writexl, BiocManager, packcircles, ggiraph, plotly, viridis,
-        collapsibleTree, igraph, scales, qs, igraph, stringr, reshape2, htmltools
+        collapsibleTree, igraph, scales, qs, igraph, stringr, reshape2, htmltools, 
+        hdf5r, qs, SingleCellExperiment
 NeedsCompilation: no
 Packaged: 2024-06-14 15:31:34 UTC; petrov
 Author: Valerio Izzi [aut, cre] (YOUR-ORCID-ID)
