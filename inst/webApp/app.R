@@ -11,7 +11,6 @@ library(shinyhelper)
 library(shinycssloaders)
 library(shinyBS)
 library(Seurat)
-library(SeuratDisk)
 library(SeuratObject)
 library(scCustomize)
 library(sp)
@@ -36,6 +35,9 @@ library(stringr)
 library(reshape2)
 library(htmltools)
 library(cicerone)
+library(hdf5r)
+library(qs)
+library(SingleCellExperiment)
 
 # Moved to R/, because stuff in `R` gets sourced automatically when in package/project
 #source("./Data/get_expressed_genes_mod.R")
@@ -1150,6 +1152,169 @@ filtres <- function(data,
   }
 }
 
+load_to_seurat <- function(filepath){
+  ext <- tools::file_ext(filepath)
+  
+  if (ext == "qs") {
+    obj <- qread(filepath)
+  }else if (ext == "QS") {
+    obj <- qread(filepath)
+  }else if (ext == "Qs") {
+    obj <- qread(filepath)
+  }
+  
+  else if (ext == "rds") {
+    obj <- readRDS(filepath)
+  } else if (ext == "RDS") {
+    obj <- readRDS(filepath)
+  } else if (ext == "Rds") {
+    obj <- readRDS(filepath)
+  }
+  
+  else if (ext == "h5ad") {
+    obj <- load_h5ad_to_list(filepath)
+    
+  } else if (ext == "H5AD") {
+    obj <- load_h5ad_to_list(filepath)
+    
+  }else if (ext == "H5ad") {
+    obj <- load_h5ad_to_list(filepath)
+  } else {
+    stop("Unsupported file type.")
+  }
+  
+  # Convert depending on object type
+  if (inherits(obj, "Seurat")) {
+    return(obj)
+    
+  } else if (inherits(obj, "SingleCellExperiment")) {
+    return(sce_to_seurat(obj))
+    
+  } else if (is.list(obj) && all(c("X", "obs", "var") %in% names(obj))) {
+    return(list_to_seurat(obj))
+    
+  } else {
+    stop("Unknown object structure.")
+  }
+}
+
+load_h5ad_to_list <- function(filepath){
+  library(Matrix)
+  library(hdf5r)
+  library(Seurat)
+  
+  h5 <- H5File$new(filepath, mode = "r")
+  X_entry <- h5[["X"]]
+  
+  if (inherits(X_entry, "H5Group")) {
+    message("Loading sparse X matrix from h5ad")
+    data <- X_entry[["data"]]$read()
+    indices <- X_entry[["indices"]]$read()
+    indptr <- X_entry[["indptr"]]$read()
+    
+    n_rows <- length(indptr) - 1
+    n_cols <- max(indices) + 1
+    
+    i <- integer(length(data))
+    j <- integer(length(data))
+    
+    for (row in seq_len(n_rows)) {
+      start <- indptr[row] + 1
+      end <- indptr[row + 1]
+      if (start <= end) {
+        idx <- start:end
+        i[idx] <- row
+        j[idx] <- indices[idx] + 1
+      }
+    }
+    
+    counts <- sparseMatrix(
+      i = i,
+      j = j,
+      x = data,
+      dims = c(n_rows, n_cols)
+    )
+  } else if (inherits(X_entry, "H5D")) {
+    message("Loading dense X matrix from h5ad")
+    counts <- X_entry$read()
+  } else {
+    stop("Unknown X format.")
+  }
+  
+  # obs and var
+  obs <- tryCatch({
+    if ("obs" %in% names(h5)) {
+      df <- as.data.frame(h5[["obs"]]$read())
+      rownames(df) <- rownames(h5[["obs"]])  # <- important: set rownames
+      df
+    } else {
+      NULL
+    }
+  }, error = function(e) NULL)
+  
+  var <- tryCatch({
+    if ("var" %in% names(h5)) {
+      df <- as.data.frame(h5[["var"]]$read())
+      rownames(df) <- rownames(h5[["var"]])  # <- important: set rownames
+      df
+    } else {
+      NULL
+    }
+  }, error = function(e) NULL)
+  
+  h5$close_all()
+  
+  # Add names to matrix
+  if (!is.null(obs)) {
+    colnames(counts) <- rownames(obs)
+  }
+  if (!is.null(var)) {
+    rownames(counts) <- rownames(var)
+  }
+  
+  # Now create Seurat object
+  seurat_obj <- CreateSeuratObject(counts = counts, meta.data = obs)
+  
+  return(seurat_obj)
+}
+
+list_to_seurat <- function(lst){
+  counts <- lst$X
+  metadata <- lst$obs
+  features <- lst$var
+  
+  seu <- CreateSeuratObject(counts = counts, meta.data = metadata)
+  
+  # Set feature names if available
+  if (!is.null(features) && "gene_ids" %in% colnames(features)) {
+    rownames(seu) <- features$gene_ids
+  } else if (!is.null(features) && "index" %in% colnames(features)) {
+    rownames(seu) <- features$index
+  }
+  
+  return(seu)
+}
+
+sce_to_seurat <- function(sce){
+  counts <- counts(sce)
+  metadata <- as.data.frame(colData(sce))
+  
+  seu <- CreateSeuratObject(counts = counts, meta.data = metadata)
+  
+  # Transfer reducedDims if they exist
+  if (length(reducedDims(sce)) > 0) {
+    for (rd in names(reducedDims(sce))) {
+      seu[[paste0("pca_", rd)]] <- CreateDimReducObject(
+        embeddings = reducedDims(sce)[[rd]],
+        key = paste0(toupper(rd), "_"),
+        assay = DefaultAssay(seu)
+      )
+    }
+  }
+  
+  return(seu)
+}
+                  
 
 # Define UI for application
 ui <- fluidPage(
@@ -1230,7 +1395,7 @@ ui <- fluidPage(
                                ".QS"
                     )) %>% helper(type = "inline",
                                   title = "Accepted file types",
-                                  content = c("MatriCom accepts scRNA-seq files of up to 1 GB from Seurat (RDS or QS format) and ScanPy/Loom (H5AD format).",
+                                  content = c("MatriCom accepts scRNA-seq files of up to 1 GB from Seurat or SingleCellExperiment (RDS or QS format), and ScanPy/Loom (H5AD format).",
                                               " ",
                                               "IMPORTANT: MatriCom currently only accepts human and mouse datasets. If your file contains Ensembl gene IDs, you must convert them to HGCN (human) or MGI (mouse) Gene Symbols by activating the conversion button."),
                                   buttonLabel = "OK")),
@@ -1535,26 +1700,27 @@ server <- function(input,output,session) {
 
   du <- reactive({
     req(input$file1)
-
-    dp <- input$file1$datapath
-
-    if(isTruthy(length(dp[grepl(".RDS",dp,ignore.case = T)])>0)){
-      df <- readRDS(input$file1$datapath)
-
-      if(strsplit(as.character(df@version),split="\\.")[[1]][1] != 3){
-        def <- DefaultAssay(df)
-        mat <- df@assays[[def]]$counts
-        rownames(mat) <- rownames(df@assays[[def]]$counts)
-        colnames(mat) <- colnames(df@assays[[def]]$counts)
-        mat <- CreateAssayObject(counts=mat)
-        mat2 <- CreateSeuratObject(counts=mat,meta.data = df@meta.data)
-        mat2 <- NormalizeData(mat2)
-        #df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
-      }
-
-      value(1)
-      return(mat2)
+    df <- load_to_seurat(input$file1$datapath)
+    
+    if(strsplit(as.character(df@version),split="\\.")[[1]][1] != 3){
+      def <- DefaultAssay(df)
+      mat <- df@assays[[def]]$counts
+      rownames(mat) <- rownames(df@assays[[def]]$counts)
+      colnames(mat) <- colnames(df@assays[[def]]$counts)
+      mat <- CreateAssayObject(counts=mat)
+      mat2 <- CreateSeuratObject(counts=mat,meta.data = df@meta.data)
+      mat2 <- NormalizeData(mat2)
+      DefaultAssay(mat2) <- "RNA"
+      # df[["RNA"]] <- as(object = df[["RNA"]], Class = "Assay")
+    }else{
+      mat2 <- df
+      DefaultAssay(mat2) <- "RNA"
     }
+    
+    value(1)
+    return(mat2)
+    
+  }) #user-specific FILE READ-IN 
 
     if(isTruthy(length(dp[grepl(".qs",dp,ignore.case = T)])>0)){
       df <- qread(input$file1$datapath)
