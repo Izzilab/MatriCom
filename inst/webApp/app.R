@@ -1357,7 +1357,7 @@ ui <- fluidPage(
                      )),
           p(em("If you use MatriCom in your publication, please cite our ",
                a("upcoming manuscript",
-                 href = "https://pubmed.ncbi.nlm.nih.gov/",
+                 href = "https://www.biorxiv.org/content/10.1101/2024.12.10.627834v1",
                  target="_blank"))),
 
           p("Follow us at ",
