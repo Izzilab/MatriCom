@@ -1720,9 +1720,7 @@ server <- function(input,output,session) {
     value(1)
     return(mat2)
     
-  }) #user-specific FILE READ-IN 
-
-    if(isTruthy(length(dp[grepl(".qs",dp,ignore.case = T)])>0)){
+     if(isTruthy(length(dp[grepl(".qs",dp,ignore.case = T)])>0)){
       df <- qread(input$file1$datapath)
 
       if(strsplit(as.character(df@version),split="\\.")[[1]][1] != 3){
