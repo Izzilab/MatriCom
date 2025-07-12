@@ -14,7 +14,7 @@ USA
 * To locally install MatriCom on your own computer, see [INSTALL](INSTALL.md) instructions.
 * Our curated interaction database, **MatriComDB**, is an integral part of the MatriCom package and can be downloaded separately [here](inst/webApp/www/MatricomDB/).
 * The [MatriCom-analyses](https://github.com/Izzilab/MatriCom-analyses) repository includes examples of analyses performed using MatriCom.
-* If you use MatriCom in your publications, please cite our upcoming manuscript: **doi** [10.1101/2024.12.10.627834](https://doi.org/10.1101/2024.12.10.627834) (*preprint at bioRxiv*)
+* If you use MatriCom in your publications, please cite our manuscript: **doi** [10.1242/jcs.263927](https://doi.org/10.1242/jcs.263927)
 
 [![Badge](https://img.shields.io/badge/MatriCom-@Shinyapps-blue)](https://matrinet.shinyapps.io/matricom/)
 [![Badge](https://img.shields.io/badge/Installation-info-green)](INSTALL.md)
