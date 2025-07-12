@@ -20,7 +20,7 @@ USA
 [![Badge](https://img.shields.io/badge/Installation-info-green)](INSTALL.md)
 [![Badge](https://img.shields.io/badge/MatriComDB-database-orange)](inst/webApp/www/MatricomDB/)
 [![Badge](https://img.shields.io/badge/Analysis-examples-orange)](https://github.com/Izzilab/MatriCom-analyses)
-[![Badge](https://img.shields.io/badge/Manuscript-bioRxiv-red)](https://www.biorxiv.org/content/10.1101/2024.12.10.627834)
+[![Badge](https://img.shields.io/badge/Manuscript-JCS-red)](https://doi.org/10.1242/jcs.263927)
 [![Badge](https://img.shields.io/badge/Release-v1.0-green)](https://github.com/Izzilab/matRicom/releases/tag/1.0)
 
 * Authors and maintainers: Izzi Lab (✉️ <valerio.izzi@oulu.fi>) and Naba Lab (✉️ <anaba@uic.edu>)
