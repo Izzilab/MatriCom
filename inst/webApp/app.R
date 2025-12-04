@@ -212,7 +212,16 @@ matricom.slim <- function(obj,
   # }
 
   sender_celltypes <- unique(obj@meta.data[,group.column])
-  list_expressed_genes_sender <- sender_celltypes %>% unique() %>% lapply(get_expressed_genes_mod, obj, (min.pct/100))
+  #list_expressed_genes_sender <- sender_celltypes %>% unique() %>% lapply(get_expressed_genes_mod, obj, (min.pct/100))
+  list_expressed_genes_sender <- unique(sender_celltypes) %>%
+    lapply(function(ct) {
+      get_expressed_genes_mod(
+        ident       = ct,
+        seurat_obj  = obj,
+        pct         = min.pct / 100,
+        assay_oi    = "RNA"
+      )
+    })
 
   #list_expressed_genes_sender <- sender_celltypes %>% unique() %>% lapply(get_expressed_genes, obj, (1/100))
 
@@ -3361,3 +3370,4 @@ server <- function(input,output,session) {
 
 # Run the application ----
 shinyApp(ui = ui, server = server)
+
