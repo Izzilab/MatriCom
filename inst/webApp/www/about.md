@@ -3,14 +3,15 @@
 * A. Naba: NIH/NCI Innovative Molecular Analysis Technologies Program - Grant R21CA261642
 * V. Izzi: Cancer Foundation Finland (2023-2024)
 * V. Izzi: DigiHealth-project, a strategic profiling project at the University of Oulu, and the Infotech Institute of the University of Oulu
+* V. Izzi: The European Union CARES project
  
 ### Resources 
 **MatriCom is powered by the following databases:**
 
 * MatrixDB (http://matrixdb.univ-lyon1.fr/)
-* basement MembraneBASE (https://bmbase.manchester.ac.uk/)
+* Basement MembraneBASE (https://bmbase.manchester.ac.uk/)
 * Kyoto Encyclopedia of Genes and Genomes, KEGG (https://www.genome.jp/kegg/pathway.html)
-* STRING (https://string-db.org/)
+* String (https://string-db.org/)
 * BioGRID (https://thebiogrid.org/)
 * OmniPath (https://omnipathdb.org/)
 
@@ -26,4 +27,4 @@ The MatriCom package (local version, no OA data, no upload file size restriction
  
 ### Development & Technical help
 MatriCom is developed and maintained by the Naba Lab for ECM Research and the Izzi Lab.  
-You can reach us for questions, doubts, help and ideas through the "Contact Us" button in the app.
+You can reach us for questions, doubts, help and ideas through the "Contact Us" button of the app

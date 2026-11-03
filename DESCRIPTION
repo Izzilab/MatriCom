@@ -1,24 +1,36 @@
 Package: MatriCom
-Title: MatriCom: inference of matrisome communication systems from scRNA-seq data
-Version: 1.0
-Authors@R: 
+Title: Inference of Matrisome Communication Systems from scRNA-seq Data
+Version: 2.0.0
+Authors@R: c(
     person("Valerio", "Izzi", , "valerio.izzi@oulu.fi", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: A tool to infer matrisome communication systems across tissues and compartments from scRNA-seq data
+           comment = c(ORCID = "0000-0002-9960-4917")),
+    person("Rijuta", "Lamba", role = "aut", comment = c(ORCID = "0000-0001-8323-4694")),
+    person("Asia M.", "Paguntalan", role = "aut"),
+    person("Petar B.", "Petrov", role = "aut", comment = c(ORCID = "0000-0001-5551-8032")),
+    person("Alexandra", "Naba", , "anaba@uic.edu", role = "aut", comment = c(ORCID = "0000-0002-4796-5614")))
+Description: Local Shiny application that infers ECM-ECM and cell-ECM
+    communication systems from single-cell RNA-seq data using MatriComDB, a
+    curated database of matrisome interactions. Accepts Seurat,
+    SingleCellExperiment, qs2 and h5ad files with no upload size limit.
 License: GPL (>= 3)
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
-LazyData: true
-Depends: R (>= 4.0)
+URL: https://github.com/izzilab/MatriCom,
+        https://doi.org/10.1242/jcs.263927
+BugReports: https://github.com/izzilab/MatriCom/issues
+Depends: R (>= 4.3)
 Imports: shiny, cicerone, Matrix, DT, dplyr, data.table, ggplot2,
         shinyWidgets, shinybusy, shinyjs, shinyhelper, shinycssloaders,
-        shinyBS, Seurat, SeuratDisk, SeuratObject, scCustomize, sp,
-        uwot, shinydashboard, ensembldb, EnsDb.Hsapiens.v86, gridExtra,
-        writexl, BiocManager, packcircles, ggiraph, plotly, viridis,
-        collapsibleTree, igraph, scales, qs, igraph, stringr, reshape2, htmltools, 
-        hdf5r, qs, SingleCellExperiment
+        SeuratObject, writexl, packcircles, ggiraph, plotly, viridis,
+        igraph, scales, stringr, reshape2, htmltools, markdown, hdf5r,
+        qs2, zip
+Suggests: SingleCellExperiment, SummarizedExperiment, ragg
+biocViews: SingleCell, Software
 NeedsCompilation: no
-Packaged: 2024-06-14 15:31:34 UTC; petrov
-Author: Valerio Izzi [aut, cre] (YOUR-ORCID-ID)
+Packaged: 2026-11-02 07:07:42 UTC; root
+Author: Valerio Izzi [aut, cre] (ORCID:
+    <https://orcid.org/0000-0002-9960-4917>),
+  Rijuta Lamba [aut] (ORCID: <https://orcid.org/0000-0001-8323-4694>),
+  Asia M. Paguntalan [aut],
+  Petar B. Petrov [aut] (ORCID: <https://orcid.org/0000-0001-5551-8032>),
+  Alexandra Naba [aut] (ORCID: <https://orcid.org/0000-0002-4796-5614>)
 Maintainer: Valerio Izzi <valerio.izzi@oulu.fi>
