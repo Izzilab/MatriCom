@@ -10,7 +10,7 @@ USA
 4. University of Illinois Cancer Center, Chicago, IL 60612, USA
 ---
 * MatriCom features an intuitive graphical user interface implemented in R Shiny.
-* MatriCom is available and **ready-to-use** online at [https://matrinet.shinyapps.io/matricom/](https://izzilab-matricom.share.connect.posit.cloud/)
+* MatriCom is available and **ready-to-use** online at [(https://izzilab-matricom.share.connect.posit.cloud/)](https://izzilab-matricom.share.connect.posit.cloud/)
 * To locally install MatriCom on your own computer, see [INSTALL](INSTALL.md) instructions.
 * Our curated interaction database, **MatriComDB**, is an integral part of the MatriCom package and can be downloaded separately [here](inst/webApp/www/MatricomDB/).
 * The [MatriCom-analyses](https://github.com/Izzilab/MatriCom-analyses) repository includes examples of analyses performed using MatriCom.
